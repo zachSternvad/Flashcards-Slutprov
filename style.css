@@ -1,0 +1,322 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    background-color: #f3f4f6;
+    color: #1f2937;
+    margin: 0;
+    padding: 0.75rem; /* Mindre padding för små skärmar */
+    box-sizing: border-box;
+}
+
+.flashcard-container {
+    background-color: white;
+    padding: 1rem; /* Anpassad padding för mobil */
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 700px;
+    text-align: center;
+    margin-top: 1rem; /* Anpassad marginal för mobil */
+    margin-bottom: 1rem; /* Anpassad marginal för mobil */
+}
+
+/* Stilar för skärmar större än mobil (t.ex. tablets och uppåt) */
+@media (min-width: 640px) {
+    body {
+        padding: 1rem; /* Återställ padding om så önskas */
+    }
+    .flashcard-container {
+        padding: 1.5rem;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+}
+
+.question-area {
+    min-height: 100px;
+    padding: 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    background-color: #f9fafb;
+    font-size: 1.0rem; /* Något mindre på mobil för mer utrymme */
+    line-height: 1.6;   /* Justerad line-height för läsbarhet */
+    text-align: left;
+    word-break: break-word;
+    white-space: pre-wrap;
+}
+
+@media (min-width: 640px) {
+    .question-area {
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+    }
+}
+
+#options-container {
+    display: grid;
+    grid-template-columns: 1fr; /* En kolumn som standard för mobil */
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Två kolumner för alternativ på större skärmar */
+@media (min-width: 640px) {
+    #options-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.option-button {
+    padding: 0.75rem 1rem;
+    border-radius: 0.375rem;
+    border: 1px solid #d1d5db;
+    background-color: white;
+    color: #1f2937;
+    font-size: 0.9rem; /* Något mindre på mobil */
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+    width: 100%;
+    word-break: break-word;
+    white-space: pre-wrap;
+    line-height: 1.5;
+}
+
+@media (min-width: 640px) {
+    .option-button {
+        font-size: 1rem;
+    }
+}
+
+.option-button:hover:not(:disabled) {
+    background-color: #eef2ff;
+    border-color: #818cf8;
+}
+    
+.option-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.option-button.selected {
+    border-color: #3b82f6;
+    background-color: #dbeafe;
+}
+.option-button.correct {
+    border-color: #10b981 !important;
+    background-color: #d1fae5 !important;
+    color: #047857 !important;
+}
+.option-button.incorrect {
+    border-color: #ef4444 !important;
+    background-color: #fee2e2 !important;
+    color: #b91c1c !important;
+}
+
+
+#feedback-area {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    min-height: 60px;
+    background-color: #f9fafb;
+    text-align: left;
+}
+#feedback-area .feedback-text {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+    #feedback-area .feedback-text.correct {
+    color: #059669;
+}
+#feedback-area .feedback-text.incorrect {
+    color: #dc2626;
+}
+#feedback-area .explanation-text {
+    font-size: 0.85rem; /* Något mindre på mobil */
+    color: #4b5563;
+    margin-top: 0.5rem;
+    white-space: pre-wrap;
+    line-height: 1.5;
+}
+
+@media (min-width: 640px) {
+    #feedback-area .explanation-text {
+        font-size: 0.9rem;
+    }
+}
+    
+.controls {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column; /* Stacka label och select vertikalt på mobil */
+    align-items: stretch; /* Få select att ta full bredd */
+    gap: 0.5rem; /* Mindre gap på mobil */
+}
+
+.controls label {
+    font-weight: 500;
+    text-align: left; /* Säkerställ vänsterjustering */
+    margin-bottom: 0.25rem; /* Lite utrymme till select */
+}
+
+.controls select {
+    padding: 0.75rem 1rem; /* Justerad padding */
+    border-radius: 0.375rem;
+    border: 1px solid #d1d5db;
+    background-color: white;
+    color: #1f2937;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%; /* Full bredd */
+}
+
+/* Stilar för kontroller på större skärmar */
+@media (min-width: 520px) { /* En lite mindre brytpunkt för just kontroller */
+    .controls {
+        flex-direction: row; /* Återgå till rad-layout */
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem; /* Återställ gap */
+    }
+    .controls label {
+        margin-bottom: 0; /* Nollställ marginal för label */
+        margin-right: 0.5rem; /* Utrymme mellan label och select */
+    }
+    .controls select {
+        width: auto; /* Automatisk bredd för select */
+        padding: 0.75rem 1.5rem; /* Återställ ursprunglig padding om så önskas */
+    }
+}
+
+.navigation-buttons {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column; /* Stacka knappar vertikalt på mobil */
+    gap: 0.75rem;
+    align-items: stretch; /* Få knappar att ta full bredd */
+}
+
+.navigation-buttons button {
+    padding: 0.75rem 1rem; /* Justerad padding */
+    border-radius: 0.375rem;
+    border: 1px solid transparent;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    background-color: #3b82f6;
+    color: white;
+    width: 100%; /* Full bredd som standard */
+}
+
+/* Stilar för navigeringsknappar på större skärmar */
+@media (min-width: 480px) {
+    .navigation-buttons {
+        flex-direction: row; /* Återgå till rad-layout */
+        justify-content: center;
+    }
+    .navigation-buttons button {
+        width: auto; /* Automatisk bredd */
+        padding: 0.75rem 1.5rem; /* Återställ ursprunglig padding */
+    }
+}
+
+
+.navigation-buttons button:hover:not(:disabled) {
+    background-color: #2563eb;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+.navigation-buttons button:disabled {
+    background-color: #9ca3af;
+    cursor: not-allowed;
+}
+.progress-indicator {
+    font-size: 0.875rem;
+    color: #4b5563;
+}
+
+#summary-area {
+    margin-top: 1.5rem; /* Minskad marginal på mobil */
+    padding: 1rem; /* Minskad padding på mobil */
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    background-color: #f9fafb;
+    text-align: left;
+}
+
+#summary-area h2 {
+    font-size: 1.25rem; /* Minskad storlek på mobil */
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #111827;
+}
+
+@media (min-width: 640px) {
+    #summary-area {
+        margin-top: 2rem;
+        padding: 1.5rem;
+    }
+    #summary-area h2 {
+        font-size: 1.5rem;
+    }
+}
+
+.summary-item {
+    padding: 0.75rem; /* Minskad padding på mobil */
+    margin-bottom: 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    background-color: white;
+}
+
+@media (min-width: 640px) {
+    .summary-item {
+        padding: 1rem;
+    }
+}
+
+.summary-item p {
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem; /* Något mindre text i sammanfattningen på mobil */
+    line-height: 1.5;
+}
+@media (min-width: 640px) {
+    .summary-item p {
+        font-size: initial; /* Återställ till ärvd eller standardstorlek */
+        line-height: initial;
+    }
+}
+
+.summary-item .question-summary {
+    font-weight: 600;
+    white-space: pre-wrap;
+}
+.summary-item .user-answer.incorrect-summary {
+    color: #ef4444;
+    text-decoration: line-through;
+}
+.summary-item .correct-answer-summary {
+    color: #10b981;
+    font-weight: 500;
+}
+.summary-totals {
+    margin-top: 1.5rem;
+    font-size: 1rem; /* Minskad storlek på mobil */
+    font-weight: 600;
+}
+
+@media (min-width: 640px) {
+    .summary-totals {
+        font-size: 1.125rem;
+    }
+}

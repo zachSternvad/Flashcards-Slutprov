@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcards App - Flerval med Resultat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="flashcard-container">
+        <h1 class="text-3xl font-bold mb-6 text-center text-gray-700">Flashcards - Flerval</h1>
+        
+        <div class="controls">
+            <label for="category-select" class="self-center">Välj kategori:</label>
+            <select id="category-select" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                <option value="webb">Webbutveckling 2</option>
+                <option value="prog">Programmering 2</option>
+            </select>
+        </div>
+
+        <div id="question-area" class="question-area">
+            <p id="question-text">Välj en kategori och klicka på "Nästa Kort" för att börja.</p>
+        </div>
+
+        <div id="options-container">
+        </div>
+        
+        <div id="feedback-area">
+            <p class="feedback-text"></p>
+            <p class="explanation-text"></p>
+        </div>
+
+        <div class="navigation-buttons mt-6">
+            <button id="next-button">Nästa Kort</button>
+        </div>
+
+        <div id="progress-indicator" class="progress-indicator mt-4">
+            Kort <span id="current-card-number">0</span> av <span id="total-card-number">0</span>
+        </div>
+        <div id="completion-message" class="mt-4 text-green-600 font-semibold"></div>
+        <div id="summary-area" class="hidden">
+        </div>
+    </div>
+
+<script src="myscript.js"></script>
+</body>
+</html>
